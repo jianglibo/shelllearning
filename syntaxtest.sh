@@ -2,7 +2,7 @@
 
 # test bash
 
-# -eq for number.
+# -eq for number. == for string
 
 number_compare()
 {
@@ -20,10 +20,28 @@ str_num_compare()
     fi
 }
 
-# don't think function will return value
-# if function don't return any,the last executed command exit status;
-# All builtins return an exit status of 2 to indicate incorrect usage
+
 number_compare
 str_num_compare
+
+# don't think function will return value,use must use $? or you can use command substitution instead.
+# if function don't return any,the last executed command exit status;
+# All builtins return an exit status of 2 to indicate incorrect usage
+
+#Command Substitution
+ftwo()
+{
+    return 4
+}
+
+ftwo
+echo $?
+
+# == must has space at two side.
+for i in "$@"; do
+    if [ $i == "a" ];then
+        echo "count a"
+    fi
+done
 
 echo $?
