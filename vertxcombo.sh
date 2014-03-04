@@ -15,7 +15,7 @@ elif [ -f /etc/rc.d/init.d/m3958funcs.sh ]; then
 fi
 
 RETVAL=0
-runing_path="/opt/vertxcombo"
+running_path="/opt/vertxcombo"
 cmdname="/usr/local/bin/vertx runmod com.m3958.vertxio~vertxcombo~0.0.1.8"
 PID_FILE=/var/run/vertxcombo.pid
 
@@ -52,12 +52,14 @@ start()
 {
 	checkrunning $PID_FILE
 	if [ $? -eq 1 ];then
-	    if [ -f $running_path ]; then
-	        cd $running_path
+	    if [ -d $running_path ]; then
+	        cd "${running_path}"
+		echo "pwd:$(pwd)"
 	    fi
 
 	    if [ -f "${running_path}/conf.json" ]; then
 	        cmdname="${cmdname} -conf conf.json"
+		echo "use conf.json"
 	    fi
 
 	    exec $cmdname 1>/dev/null 2>&1 &
@@ -83,7 +85,7 @@ case "$1" in
     status)
         checkrunning $PID_FILE
         if [ $? -eq 1 ]; then
-        	echo "pid file not exists"
+        	echo "not running."
         elif [ $? -eq 2 ]; then
         	echo "pidfile exists,but process not running"
 		else
