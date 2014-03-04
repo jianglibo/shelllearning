@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # test bash
 
 # -eq for number. == for string
@@ -65,5 +65,12 @@ for i in "$*"; do
         echo $i $((idx++))
 done
 
-
 echo $?
+
+echo "before cd"
+echo $(ls)
+cd /opt/vertxworld
+echo "after cd"
+echo $(ls)
+
+
