@@ -38,10 +38,32 @@ ftwo
 echo $?
 
 # == must has space at two side.
+# $* expand to words,"$*" expand to one word.
+# $@ expaned to words, "$@" expand to words.
+
+idx=0
+echo "\"\$@\""
 for i in "$@"; do
-    if [ $i == "a" ];then
-        echo "count a"
-    fi
+        echo $i $((idx++))
 done
+
+idx=0
+echo "\$@"
+for i in $@; do
+        echo $i $((idx++))
+done
+
+idx=0
+echo "\$*"
+for i in $*; do
+        echo $i $((idx++))
+done
+
+idx=0
+echo "\"\$*\""
+for i in "$*"; do
+        echo $i $((idx++))
+done
+
 
 echo $?
