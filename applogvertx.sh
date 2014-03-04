@@ -15,7 +15,7 @@ elif [ -f /etc/rc.d/init.d/m3958funcs.sh ]; then
 fi
 
 RETVAL=0
-runing_path="/opt/vertxworld/vertxprj/applogvertx"
+running_path="/opt/vertxworld/vertxprj/applogvertx"
 cmdname="mvn vertx:runMod"
 PID_FILE=/var/run/applogvertx.pid
 
@@ -52,10 +52,10 @@ start()
 {
     checkrunning $PID_FILE
     if [ $? -eq 1 ];then
-        if [ -f $running_path ]; then
+        if [ -d $running_path ]; then
             cd $running_path
         fi
-
+        echo "pwd:$(pwd)"
         exec $cmdname 1>/dev/null 2>&1 &
         echo $! 1>$PID_FILE
         echo "start success" $(cat $PID_FILE)
@@ -78,16 +78,6 @@ case "$1" in
         ;;
     status)
         checkrunning $PID_FILE
-        if [ $? -eq 1 ]; then
-            echo "pid file not exists"
-        elif [ $? -eq 2 ]; then
-            echo "pidfile exists,but process not running"
-        else
-            echo "running" $(cat $PID_FILE)
-        fi
-#        if [ $RETVAL -eq 3 -a -f $lockfile ] ; then
-#            RETVAL=2
-#        fi
         ;;
     *)
         echo $"Usage: $0 {start|stop|restart|status}"

@@ -84,16 +84,6 @@ case "$1" in
         ;;
     status)
         checkrunning $PID_FILE
-        if [ $? -eq 1 ]; then
-        	echo "not running."
-        elif [ $? -eq 2 ]; then
-        	echo "pidfile exists,but process not running"
-		else
-			echo "running" $(cat $PID_FILE)
-        fi
-#        if [ $RETVAL -eq 3 -a -f $lockfile ] ; then
-#            RETVAL=2
-#        fi
         ;;
     *)
         echo $"Usage: $0 {start|stop|restart|status}"
