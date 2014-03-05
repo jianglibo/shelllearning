@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+#
 
 checkinstalled()
 {
@@ -7,6 +8,7 @@ checkinstalled()
         echo "Usage: checkinstalled appname"
         return 2
     fi
+    echo "checkiing ${1} install status...."
     installed=$(yum list installed | sed -n /^"$1"/p)
     if [[ -z $installed ]]; then
         return 3
@@ -18,7 +20,7 @@ checkinstalled()
 
 installepel()
 {
-    epel=$(yum repolist | sed -n /^epel/p)
+    epel=$(yum repolist | sed -n /epel/p)
 
     if [[ -n $epel ]]; then
         echo "epel exists"

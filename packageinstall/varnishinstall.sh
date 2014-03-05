@@ -4,10 +4,18 @@
 . ./pkfuncs.sh
 
 installepel
-checkinstalled "varnish"
 
-if ! [[ $? -eq 3 ]]; then
-    echo "already installed?"
+#checkinstalled "varnish"
+
+# if ! [[ $? -eq 3 ]]; then
+#     echo "already installed?"
+#     exit 0
+# fi
+# 
+varnishd -V
+
+if ! [[ $? -eq 127 ]]; then
+    echo "varnish already installed."
     exit 0
 fi
 
@@ -31,3 +39,5 @@ else
     echo "already installed"
 fi
 
+#yum -y remove httpd
+#repoquery -lq time

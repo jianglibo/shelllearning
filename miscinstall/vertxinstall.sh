@@ -24,7 +24,7 @@ UNZIPFN=$(echo $FN | sed -n 's;\(.*\)\.[^.]\+\.[^.]\+;\1;p')
 if [[ -f $FN ]]; then
     echo "already fetched,skip fetch."
 else
-    echo "start fetching..."
+    echo "start fetching...${URL}"
     curl -L -o $FN $URL
     wait $!
 fi
@@ -52,10 +52,10 @@ popd 1>/dev/null
 
 lndir=
 
-if [[ -d "/usr/local/sbin" ]]; then
-    lndir=/usr/local/sbin
-elif [[ -d /sbin ]]; then
-    lndir=/sbin
+if [[ -d "/usr/local/bin" ]]; then
+    lndir=/usr/local/bin
+elif [[ -d /bin ]]; then
+    lndir=/bin
 else
     echo "no executable path."
     exit 1

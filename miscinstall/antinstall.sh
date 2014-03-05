@@ -21,7 +21,7 @@ pushd $TARGET_DIR 1>/dev/null
 if [[ -f $FN ]]; then
     echo "already fetched,skip fetch."
 else
-    echo "start fetching..."
+    echo "start fetching...${URL}"
     curl -L -o $FN $URL
     wait $!
 fi

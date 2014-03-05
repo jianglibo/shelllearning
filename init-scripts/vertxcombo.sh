@@ -16,7 +16,7 @@ fi
 
 RETVAL=0
 running_path="/opt/vertxcombo"
-cmdname="/usr/local/bin/vertx runmod com.m3958.vertxio~vertxcombo~0.0.1.8"
+cmdname="vertx runmod com.m3958.vertxio~vertxcombo~0.0.1.8"
 PID_FILE=/var/run/vertxcombo.pid
 
 #runlevel=$(set -- $(runlevel); eval "echo \$$#" )
