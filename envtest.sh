@@ -2,7 +2,7 @@
 
 #env 是 environment (環境) 的簡寫啊，
 #上面的例子當中，是列出來所有的環境變數。
-#當然，如果使用 export 也會是一樣的內容～ 
+#當然，如果使用 export 也會是一樣的內容～
 #只不過， export 還有其他額外的功能就是了，我們等一下再提這個 export 指令。
 # 那麼上面這些變數有些什麼功用呢？底下我們就一個一個來分析分析！
 
@@ -18,7 +18,7 @@
 # -i  ：將後面名為 variable 的變數定義成為整數數字 (integer) 類型
 # -x  ：用法與 export 一樣，就是將後面的 variable 變成環境變數；
 # -r  ：將變數設定成為 readonly 類型，該變數不可被更改內容，也不能 unset
-# 
+#
 # 範例一：讓變數 sum 進行 100+300+50 的加總結果
 # [root@www ~]# sum=100+300+50
 # [root@www ~]# echo $sum
@@ -26,7 +26,7 @@
 # [root@www ~]# declare -i sum=100+300+50
 # [root@www ~]# echo $sum
 # 450         <==瞭乎？？
-# 
+#
 #  cut, grep
 #  xargs 這個玩意兒就是在產生某個指令的參數的意思
 #[root@www ~]# cut -d'分隔字符' -f fields <==用于有特定分隔字符
@@ -54,3 +54,19 @@ curl -L -o $FN $URL
 
 curl，如果curl没有安装，则返回$? -eq 127，否则返回2
 bash，也可以这样测试
+
+#!/bin/bash
+read var_year
+echo "The year is: $var_year"
+
+echo -n "Enter your name and press [ENTER]: "
+read var_name
+echo "Your name is: $var_name"
+
+Bash includes the ‘<<<’ redirection operator, allowing a string to be used as the standard input to a command.
+
+IFS=";" ;read var1 var2 <<< "x;y"
+
+[[]] No filename expansion or word splitting takes place between [[ and ]], but there is parameter expansion and command substitution.
+
+分词是在命令处理期间进行，而不是在结果中进行

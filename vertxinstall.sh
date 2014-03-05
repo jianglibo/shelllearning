@@ -1,18 +1,76 @@
 #!/bin/bash
 #
 
-URL=http://dl.bintray.com/vertx/downloads/vert.x-2.1RC1.tar.gz
+vertx 1>/dev/null 2>&1
+
+if [[ $? -ne 127 ]]; then
+    echo "already installed!"
+    exit 0
+fi
 
 TARGET_DIR=/opt/vertxworld
 
-TMPF=/tmp/wgetvertx
+if ! [[ -d $TARGET_DIR ]]; then
+     mkdir -p $TARGET_DIR
+fi
 
-cd $TARGET_DIR
+pushd $TARGET_DIR 1>/dev/null
 
-echo "fetching ${URL}"
-wget $URL 1>$TMPF 2>&1
+URL=http://dl.bintray.com/vertx/downloads/vert.x-2.1RC1.tar.gz
+FN=$(echo $URL | sed -n 's;.*/;;p')
+UNZIPFN=$(echo $FN | sed -n 's;\(.*\)\.[^.]\+\.[^.]\+;\1;p')
 
-wait $!
-echo "fetch done."
 
-echo $(cat $TMPF)
+if [[ -f $FN ]]; then
+    echo "already fetched,skip fetch."
+else
+    echo "start fetching..."
+    curl -L -o $FN $URL
+    wait $!
+fi
+
+
+if [[ -f "$FN" ]]; then
+    echo "fetch done."
+else
+    echo "fetch failure"
+    exit 1
+fi
+
+
+echo "extrating..."
+tar -zxf "$FN"
+
+fullpath="$TARGET_DIR/$UNZIPFN/bin/vertx"
+
+if ! [[ -f $fullpath ]]; then
+    echo "untar failure"
+    exit 1
+fi
+
+popd 1>/dev/null
+
+lndir=
+
+if [[ -d "/usr/local/sbin" ]]; then
+    lndir=/usr/local/sbin
+elif [[ -d /sbin ]]; then
+    lndir=/sbin
+else
+    echo "no executable path."
+    exit 1
+fi
+
+pushd $lndir 1>/dev/null
+echo $lndir
+ln -s "$fullpath" ./
+
+popd 1>/dev/null
+
+vertx 1>/dev/null 2>&1
+
+if [[ $? -eq 127 ]]; then
+    echo "install failure."
+else
+    echo "install success."
+fi
