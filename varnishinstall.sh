@@ -12,7 +12,7 @@ fi
 varnishd -V 1>/dev/null 2>&1
 
 if [[ $? -eq 127 ]]; then
-    yum install varnish
+    yum -y install varnish
     wait $!
     echo "install success."
 else
