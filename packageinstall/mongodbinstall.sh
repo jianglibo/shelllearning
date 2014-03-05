@@ -1,6 +1,7 @@
 #!/bin/bash
+#
 
-. m3958funcs.sh
+. ./pkfuncs.sh
 
 installepel
 
@@ -16,12 +17,13 @@ enabled=1
 End-of-message
 fi
 
-checkinstalled "mongodb"
+checkinstalled "mongodb-server"
 
 if [[ $? -eq 3 ]]; then
     yum -y install mongodb-server
     yum -y install mongodb
 fi
+
 # mongo-10gen
 # if [[ $? -eq 3 ]]; then
 #     yum -y install rabbitmq-server

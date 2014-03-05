@@ -1,4 +1,15 @@
 #!/bin/bash
+#
+
+. ./pkfuncs.sh
+
+installepel
+checkinstalled "varnish"
+
+if ! [[ $? -eq 3 ]]; then
+    echo "already installed?"
+    exit 0
+fi
 
 repoinstalled=$(yum repolist | sed -n /^varnish/p)
 
@@ -9,11 +20,12 @@ else
     echo "repo exists.continue install...."
 fi
 
+yum -y install varnish
+wait $!
+
 varnishd -V 1>/dev/null 2>&1
 
 if [[ $? -eq 127 ]]; then
-    yum -y install varnish
-    wait $!
     echo "install success."
 else
     echo "already installed"

@@ -1,6 +1,7 @@
 #!/bin/bash
+#
 
-. m3958funcs.sh
+. ./pkfuncs.sh
 
 installepel
 
