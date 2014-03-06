@@ -11,8 +11,8 @@ installepel
 #     echo "already installed?"
 #     exit 0
 # fi
-# 
-varnishd -V
+#
+varnishd -V 1>/dev/null 2>&1
 
 if ! [[ $? -eq 127 ]]; then
     echo "varnish already installed."
