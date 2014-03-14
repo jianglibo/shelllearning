@@ -64,8 +64,9 @@ start()
             cmdname="${cmdname} -conf conf.json"
         echo "use conf.json"
         fi
-
+        echo "start exec $cmdname"
         exec $cmdname 1>/dev/null 2>&1 &
+        echo "after exec $cmdname"
         echo $! 1>$PID_FILE
         echo "start success" $(cat $PID_FILE)
         return 0
