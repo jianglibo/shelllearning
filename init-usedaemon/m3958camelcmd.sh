@@ -5,11 +5,11 @@
 RUNNING_PATH=/opt/camelworld/alone
 MODULE_VERSION=0.0.1
 PID_FILE=/var/run/m3958camel.pid
-MVNCMD=/usr/local/bin/mvn
+MVNCMD=/usr/bin/mvn
 
 if [ ! -x $MVNCMD ]
 then
-    echo "mvn not found in /usr/local/bin/"
+    echo "mvn not found in /usr/bin/"
     exit 5
 fi
 if ! [[ -e $RUNNING_PATH ]]; then
