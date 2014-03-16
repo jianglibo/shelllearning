@@ -1,18 +1,18 @@
 #!/bin/bash
 #
-# visitrank    Start up the visitrank server daemon
+# m3958camel    Start up the m3958camel server daemon
 #
 # chkconfig: 345 99 7
-# description to start stop visitrank service.
-# pidfile: /var/run/visitrank.pid
+# description to start stop m3958camel service.
+# pidfile: /var/run/m3958camel.pid
 
 . /etc/init.d/functions
 
 retval=0
-pidfile=/var/run/visitrank.pid
+pidfile=/var/run/m3958camel.pid
 
-exec="/usr/sbin/visitrank"
-prog="visitrank"
+exec="/usr/sbin/m3958camel"
+prog="m3958camel"
 lockfile="/var/lock/subsys/$prog"
 
 start() {
@@ -24,7 +24,7 @@ start() {
     fi
 
     followdaemon="--pidfile $pidfile $exec"
-    echo -n "Starting visitrank $followdaemon: "
+    echo -n "Starting m3958camel $followdaemon: "
     echo
     daemon $followdaemon
     retval=$?
@@ -41,7 +41,7 @@ start() {
 }
 
 stop() {
-    echo -n "Stopping visitrank: "
+    echo -n "Stopping m3958camel: "
     killproc -p $pidfile $prog
     retval=$?
     echo

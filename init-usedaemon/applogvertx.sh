@@ -1,18 +1,18 @@
 #!/bin/bash
 #
-# visitrank    Start up the visitrank server daemon
+# applogvertx    Start up the applogvertx server daemon
 #
 # chkconfig: 345 99 7
-# description to start stop visitrank service.
-# pidfile: /var/run/visitrank.pid
+# description to start stop applogvertx service.
+# pidfile: /var/run/applogvertx.pid
 
 . /etc/init.d/functions
 
 retval=0
-pidfile=/var/run/visitrank.pid
+pidfile=/var/run/applogvertx.pid
 
-exec="/usr/sbin/visitrank"
-prog="visitrank"
+exec="/usr/sbin/applogvertx"
+prog="applogvertx"
 lockfile="/var/lock/subsys/$prog"
 
 start() {
@@ -24,7 +24,7 @@ start() {
     fi
 
     followdaemon="--pidfile $pidfile $exec"
-    echo -n "Starting visitrank $followdaemon: "
+    echo -n "Starting applogvertx $followdaemon: "
     echo
     daemon $followdaemon
     retval=$?
@@ -41,7 +41,7 @@ start() {
 }
 
 stop() {
-    echo -n "Stopping visitrank: "
+    echo -n "Stopping applogvertx: "
     killproc -p $pidfile $prog
     retval=$?
     echo
