@@ -1,18 +1,18 @@
 #!/bin/bash
 #
-# m3958camel    Start up the m3958camel server daemon
+# cmscamel    Start up the cmscamel server daemon
 #
 # chkconfig: 345 99 7
-# description to start stop m3958camel service.
-# pidfile: /var/run/m3958camel.pid
+# description to start stop cmscamel service.
+# pidfile: /var/run/cmscamel.pid
 
 . /etc/init.d/functions
 
 retval=0
-pidfile=/var/run/m3958camel.pid
+pidfile=/var/run/cmscamel.pid
 
-exec="/usr/sbin/m3958camel"
-prog="m3958camel"
+exec="/usr/sbin/cmscamel"
+prog="cmscamel"
 lockfile="/var/lock/subsys/$prog"
 
 start() {
@@ -24,7 +24,7 @@ start() {
     fi
 
     followdaemon="--pidfile $pidfile $exec"
-    echo -n "Starting m3958camel $followdaemon: "
+    echo -n "Starting cmscamel $followdaemon: "
     echo
     daemon $followdaemon
     retval=$?
@@ -41,7 +41,7 @@ start() {
 }
 
 stop() {
-    echo -n "Stopping m3958camel: "
+    echo -n "Stopping cmscamel: "
     killproc -p $pidfile $prog
     retval=$?
     echo

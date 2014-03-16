@@ -4,7 +4,7 @@
 
 RUNNING_PATH=/opt/camelworld/alone
 MODULE_VERSION=0.0.1
-PID_FILE=/var/run/m3958camel.pid
+PID_FILE=/var/run/cmscamel.pid
 MVNCMD=/usr/local/bin/mvn
 
 if [ ! -x $MVNCMD ]
