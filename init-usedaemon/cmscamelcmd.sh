@@ -2,7 +2,7 @@
 #
 #we must write pidfile myself.
 
-RUNNING_PATH=/opt/m3958camel
+RUNNING_PATH=/opt/cmscamel
 MODULE_VERSION=0.0.1
 PID_FILE=/var/run/cmscamel.pid
 MVNCMD=/usr/bin/mvn
