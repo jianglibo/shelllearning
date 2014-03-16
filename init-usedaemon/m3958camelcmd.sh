@@ -2,7 +2,7 @@
 #
 #we must write pidfile myself.
 
-RUNNING_PATH=/opt/camelworld/alone
+RUNNING_PATH=/opt/m3958camel
 MODULE_VERSION=0.0.1
 PID_FILE=/var/run/m3958camel.pid
 MVNCMD=/usr/bin/mvn
@@ -16,7 +16,7 @@ if ! [[ -e $RUNNING_PATH ]]; then
     mkdir -p $RUNNING_PATH
 fi
 cd $RUNNING_PATH
-execline="mvn camel:run"
+execline="${MVNCMD} camel:run"
 echo $execline
 echo
 exec $execline 1>/dev/null 2>&1 &
