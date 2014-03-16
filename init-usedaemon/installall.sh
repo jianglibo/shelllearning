@@ -19,3 +19,8 @@ cp -f ./m3958camel.sh "${INIT_DIR}/m3958camel"
 cp -f ./m3958camelcmd.sh "${SBIN_DIR}/m3958camel"
 chmod u+x "${INIT_DIR}/m3958camel"
 chmod u+x "${SBIN_DIR}/m3958camel"
+
+cp -f ./applogvertx.sh "${INIT_DIR}/applogvertx"
+cp -f ./applogvertxcmd.sh "${SBIN_DIR}/applogvertx"
+chmod u+x "${INIT_DIR}/applogvertx"
+chmod u+x "${SBIN_DIR}/applogvertx"
