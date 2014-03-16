@@ -3,7 +3,7 @@
 #we must write pidfile myself.
 
 RUNNING_PATH=/opt/applogvertx
-MODULE_VERSION=0.0.1.8
+MODULE_VERSION=0.0.1
 PID_FILE=/var/run/applogvertx.pid
 VERTX=/usr/sbin/vertx
 
@@ -19,7 +19,7 @@ if ! [[ -e $RUNNING_PATH ]]; then
 fi
 
 cd $RUNNING_PATH
-execline="$VERTX runmod com.m3958.vertxio~applogvertx~$MODULE_VERSION -conf $RUNNING_PATH/conf.json"
+execline="$VERTX runmod com.m3958.vertxprj~applogvertx~$MODULE_VERSION -conf $RUNNING_PATH/conf.json"
 echo $execline
 echo
 exec $execline 1>/dev/null 2>&1 &

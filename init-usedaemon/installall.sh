@@ -15,7 +15,14 @@ cp -f ./visitrankcmd.sh "${SBIN_DIR}/visitrank"
 chmod u+x "${INIT_DIR}/visitrank"
 chmod u+x "${SBIN_DIR}/visitrank"
 
+
 cp -f ./cmscamel.sh "${INIT_DIR}/cmscamel"
 cp -f ./cmscamelcmd.sh "${SBIN_DIR}/cmscamel"
 chmod u+x "${INIT_DIR}/cmscamel"
 chmod u+x "${SBIN_DIR}/cmscamel"
+
+cp -f ./applogvertx.sh "${INIT_DIR}/applogvertx"
+cp -f ./applogvertxcmd.sh "${SBIN_DIR}/applogvertx"
+chmod u+x "${INIT_DIR}/applogvertx"
+chmod u+x "${SBIN_DIR}/applogvertx"
+
