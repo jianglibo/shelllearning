@@ -3,7 +3,7 @@
 #we must write pidfile myself.
 
 RUNNING_PATH=/opt/visitrank
-MODULE_VERSION=0.0.1
+MODULE_VERSION=0.0.2
 PID_FILE=/var/run/visitrank.pid
 VERTX=/usr/sbin/vertx
 
