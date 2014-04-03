@@ -16,7 +16,7 @@ fi
 
 RETVAL=0
 running_path="/opt/visitrank"
-cmdname="vertx runmod com.m3958~visitrank~0.0.1"
+cmdname="vertx runmod com.m3958~visitrank~0.0.3"
 PID_FILE=/var/run/visitrank.pid
 
 #runlevel=$(set -- $(runlevel); eval "echo \$$#" )
