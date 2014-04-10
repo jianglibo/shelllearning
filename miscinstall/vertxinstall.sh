@@ -1,88 +1,71 @@
-#!/bin/bash
-#
-# visitrank    Start up the visitrank server daemon
-#
-# chkconfig: 345 99 7
-# description to start stop visitrank service.
-# pidfile: /var/run/visitrank.pid
+#/bin/bash
 
-. /etc/init.d/functions
+vertx version
 
-retval=0
-pidfile=/var/run/visitrank.pid
+if ! [[ $? -eq 127 ]]; then
+    echo "already installed"
+    exit 0
+fi
 
-exec="/usr/sbin/visitrank"
-prog="visitrank"
-lockfile="/var/lock/subsys/$prog"
+TARGET_DIR=/opt/misctools
+URL=http://dl.bintray.com/vertx/downloads/vert.x-2.1RC3.tar.gz
+FN=$(echo $URL | sed -n 's;.*/;;p')
+UNZIPFN=$(echo $FN | sed -n 's;\(.*\).tar.gz;\1;p')
 
-start() {
+if ! [[ -d $TARGET_DIR ]]; then
+     mkdir -p $TARGET_DIR
+fi
 
-    if [ ! -x $exec ]
-    then
-        echo $exec not found
-        exit 5
-    fi
+pushd $TARGET_DIR 1>/dev/null
 
-    followdaemon="--pidfile $pidfile $exec"
-    echo -n "Starting visitrank $followdaemon: "
-    echo
-    daemon $followdaemon
-    retval=$?
-    if [ $retval -eq 0 ]
-    then
-        touch $lockfile
-        echo_success
-        echo
-    else
-        echo_failure
-        echo
-    fi
-    return $retval
-}
+if [[ -f $FN ]]; then
+    echo "already fetched,skip fetch."
+else
+    echo "start fetching...${URL}"
+    curl -L -o $FN $URL
+    wait $!
+fi
 
-stop() {
-    echo -n "Stopping visitrank: "
-    killproc -p $pidfile $prog
-    retval=$?
-    echo
-    [ $retval -eq 0 ] && rm -f $lockfile
-    return $retval
-}
+if [[ -f "$FN" ]]; then
+    echo "fetch done."
+else
+    echo "fetch failure"
+    exit 1
+fi
 
-restart() {
-    stop
-    start
-}
+echo "extrating..."
+tar -zxf "$FN"
 
-rh_status() {
-    status -p $pidfile $prog
-}
+fullpath="$TARGET_DIR/$UNZIPFN/bin/vertx"
 
-rh_status_q() {
-    rh_status >/dev/null 2>&1
-}
+if ! [[ -f $fullpath ]]; then
+    echo "untar failure"
+    exit 1
+fi
 
+popd 1>/dev/null
 
-# See how we were called.
-case "$1" in
-    start)
-        rh_status_q && exit 0
-        $1
-        ;;
-    stop)
-        rh_status_q || exit 0
-        $1
-        ;;
-    restart)
-        $1
-        ;;
-    status)
-        rh_status
-        ;;
-    *)
-    echo "Usage: $0 {start|stop|status|restart}"
+lndir=
 
-    exit 2
-esac
+if [[ -d "/usr/local/sbin" ]]; then
+    lndir=/usr/local/bin
+elif [[ -d /sbin ]]; then
+    lndir=/bin
+else
+    echo "no executable path."
+    exit 1
+fi
 
-exit $?
+pushd $lndir 1>/dev/null
+echo $lndir
+ln -s "$fullpath" ./
+
+popd 1>/dev/null
+
+ant --version 1>/dev/null 2>&1
+
+if [[ $? -eq 127 ]]; then
+    echo "install failure."
+else
+    echo "install success."
+fi
